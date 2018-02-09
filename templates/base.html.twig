@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Monycks !{% endblock %}</title>
+    {% block stylesheets %}
+        <link rel="stylesheet" href="/css/main.css">
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+    {% endblock %}
+</head>
+<body>
+{% include 'header.html.twig' %}
+{% if app.request.attributes.get('_route') == 'homepage' %}
+<div class="container marketing">
+{% if tickets is defined and tickets is not null %}
+    {% for ticket in tickets %}
+        <div class="row featurette">
+            <div class="col-md-12">
+                <h2 class="featurette-heading">{{ ticket.title }}<br>
+                    <span class="text-muted">by {{ ticket.user.username }}</span></h2>
+                <p class="lead">{{ ticket.description }}</p>
+            </div>
+            {#<div class="col-md-5">
+                <img class="featurette-image img-fluid mx-auto" src="img/placeholder.svg" alt="Generic placeholder image"
+                     width="500px">
+            </div>#}
+        </div>
+        <hr class="featurette-divider">
+    {% endfor %}
+{% endif %}
+</div><!-- /.container -->
+{% endif %}
+{% block body %}{% endblock %}
+<script src="js/jquery-1.9.1.min.js"></script>
+{% block javascripts %}
+{% endblock %}
+</body>
+</html>
+<script>
+    $(function () {
+        $('#addTransfer').click(function () {
+            $('#transForm').toggle();
+        });
+
+        $('#addUser').click(function () {
+            $('#userForm').toggle();
+        });
+        $('#addSkill').click(function () {
+            $('#skillForm').toggle();
+        });
+        $('#addTicket').click(function () {
+            $('#ticketForm').toggle();
+        });
+        $('#addOffer').click(function () {
+            $('#offerForm').toggle();
+        });
+    })
+</script>

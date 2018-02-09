@@ -1,0 +1,24 @@
+<h1>Tickets</h1>
+{% if tickets is defined and tickets is not null %}
+    <table class="table table-hover table-striped bg-light">
+        <thead>
+        <th>User</th>
+        <th>Description</th>
+        <th>Date</th>
+        <th>Skill</th>
+        <th>Offer(s)</th>
+        <th>&nbsp;&nbsp;&nbsp;✘</th>
+        </thead>
+        {% for ticket in tickets %}
+            <tr><td>{{ ticket.user.username }}</td>
+                <td>{{ ticket.title[:50] }}</td>
+                <td>{{ ticket.date.date|date('d-m-y H:i') }}</td>
+                <td>{{ ticket.skill.name }}</td>
+                <td>{{ ticket.offers |length }}</td>
+                    <td><a href="{#{{ path('ticket_delete',{'id':skill.id}) }}#}">
+                        <button class="float-right btn btn-sm btn-danger">✘</button></a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endif %}

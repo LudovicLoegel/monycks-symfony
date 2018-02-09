@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="container-fluid mt-5">
+        <div class="row text-center">
+            <div class="col-12">
+                <form name="ticket" method="post">
+                    <div id="ticket">
+                        <div>
+                            <input hidden id="ticket_user" name="ticket[user]" value="{{ app.user.id }}"/>
+                        </div>
+                        <div>
+                            <label for="ticket_title" class="required">Title</label>
+                            <input id="ticket_title" name="ticket[title]" required="required" type="text">
+                        </div>
+                        <div>
+                            <label for="ticket_description" class="required">Description</label>
+                            <input id="ticket_description" name="ticket[description]" required="required" type="text">
+                        </div>
+                        <div>
+                            <label for="ticket_skill" class="required">Skill</label>
+                            <select id="ticket_skill" name="ticket[skill]">
+                                {% for skill in skills %}
+                                    <option value="{{ skill.id }}">{{ skill.name }}</option>
+                                    {% endfor %}
+                            </select>
+                        </div>
+                        <input type="submit" class="btn btn-success mb-2" value="⊞">
+                    </div>
+
+                </form>
+                {% include 'user/ticket.html.twig' %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

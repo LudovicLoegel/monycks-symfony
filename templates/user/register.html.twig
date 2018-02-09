@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+{% block  body %}
+    <div class="container mt-5">
+    <form name="user" method="post"  class="form-signin register">
+        <h2 class="form-signin-heading">Register:</h2>
+        <div>
+
+            <input type="text" id="user_username" name="user[username]" placeholder="Username" class="form-control" required="required" />
+        </div>
+        <div>
+
+            <input type="email" id="user_email" name="user[email]"  placeholder="Email address" class="form-control" required="required" />
+        </div>
+        <div>
+
+            <input type="password" id="user_plainPassword_first"  placeholder="Password" class="form-control" name="user[plainPassword][first]" required="required" />
+        </div>
+        <div>
+
+            <input type="password" id="user_plainPassword_second"  placeholder="Confirm password" class="form-control" name="user[plainPassword][second]" required="required" />
+        </div>
+        <button class="btn btn-lg btn-success btn-block mt-3" type="submit">Register !</button>
+    </form>
+    </div>
+{% endblock %}

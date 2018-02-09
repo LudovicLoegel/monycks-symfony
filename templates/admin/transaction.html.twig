@@ -1,0 +1,61 @@
+<h1>Transfers <a id="addTransfer" class="text-success" >⊞</a></h1>
+<form  id="transForm" name="transaction" method="post" style="display: none">
+    <div id="transaction">
+        <div>
+            <label for="transaction_sender" class="required">Sender</label>
+            <select class="form-control text-danger" id="transaction_sender" name="transaction[sender]">
+                {% for user in users %}
+                    <option value="{{ user.id }}">{{ user.username }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label for="transaction_receiver" class="required">Receiver</label>
+            <select class="form-control text-success" id="transaction_receiver" name="transaction[receiver]">
+                {% for user in users %}
+                    <option value="{{ user.id }}">{{ user.username }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <hr>
+        <div class="form-row">
+            <div class="col-12 mb-3">
+                <input class="form-control" type="text" id="transaction_comment" name="transaction[comment]"
+                       required="required" placeholder="Comment..."/>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-10">
+                <input class="form-control" type="number" id="transaction_amount" name="transaction[amount]"
+                       required="required" placeholder="Amount..."/>
+            </div>
+            <div class="col-2">
+                <input type="submit" class="btn btn-success mb-2" value="⊞">
+            </div>
+        </div>
+    </div>
+</form>
+
+{% if transactions is defined and transactions is not null %}
+    <table class="table table-hover table-striped bg-light">
+        <thead>
+        <th>$</th>
+        <th>↥</th>
+        <th>↧</th>
+        <th>✘</th>
+        </thead>
+        {% for transaction in transactions %}
+            <tr>
+                <td>
+                    <b> {{ transaction.amount }}</b></td>
+                <td class="text-danger">{{ transaction.sender.username }}</td>
+                <td class="text-success">{{ transaction.receiver.username }}</td>
+                <td><a href="{{ path('transaction_delete',{'id':transaction.id}) }}">
+                        <button class="float-right btn btn-sm btn-danger">✘</button>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endif %}
+

@@ -1,0 +1,30 @@
+<h1>Skills <a id="addSkill" class="text-success" >⊞</a></h1>
+<form id="skillForm" name="skill" method="post" style="display: none">
+    <div class="form-row">
+        <div class="col-10">
+            <input id="skill_name" name="skill[name]" required="required" type="text"
+                   class="form-control" placeholder="New skill name...">
+        </div>
+        <div class="col-2">
+            <input type="submit" class="btn btn-success mb-2" value="⊞">
+        </div>
+    </div>
+</form>
+
+{% if skills is defined and skills is not null %}
+    <table class="table table-hover table-striped bg-light">
+        <thead>
+        <th></th>
+        <th>Name</th>
+        <th>&nbsp;&nbsp;&nbsp;✘</th>
+        </thead>
+        {% for skill in skills %}
+            <tr><td></td>
+                <td>{{ skill.name }}</td>
+                    <td><a href="{{ path('skill_delete',{'id':skill.id}) }}">
+                        <button class="float-right btn btn-sm btn-danger">✘</button></a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endif %}

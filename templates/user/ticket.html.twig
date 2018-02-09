@@ -1,0 +1,49 @@
+<h1>Tickets <a id="addTicket" class="text-success" >⊞</a></h1>
+{% if ticketsP is defined and ticketsP is not null %}
+    <h1>Tickets in progress</h1>
+    <table class="table table-hover table-striped bg-light">
+        <thead>
+        <th>User</th>
+        <th>Description</th>
+        <th>Time Estimate</th>
+        <th>Skill</th>
+        <th>Helper</th>
+        </thead>
+        {% for ticket in ticketsP %}
+            <tr><td>{{ ticket.username }}</td>
+                <td>{{ ticket.title[:50] }}</td>
+                <td>{{ ticket.time|date('H:i') }}</td>
+                <td>{{ ticket.name }}</td>
+                <td>{{ ticket.helper }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endif %}
+{% if ticketsW is defined and ticketsW is not null %}
+    <h1>Tickets waiting</h1>
+    <table class="table table-hover table-striped bg-light">
+        <thead>
+        <th>User</th>
+        <th>Description</th>
+        <th>Date</th>
+        <th>Skill</th>
+        <th>Offer(s)</th>
+        </thead>
+        {% for ticket in ticketsW %}
+            <tr><td>{{ ticket.user.username }}</td>
+                <td>{{ ticket.title[:50] }}</td>
+                <td>{{ ticket.date.date|date('d-m-y H:i') }}</td>
+                <td>{{ ticket.skill.name }}</td>
+                <td>
+                    {{ ticket.offers |length }}
+                    <a href="{{ path('offer_add',{'id':ticket.id}) }}">
+                        <button class="float-right btn btn-sm btn-success">⊞</button>
+                    </a>
+                    <a href="{{ path('ticket_see',{'id':ticket.id}) }}">
+                        <button class="float-right btn btn-sm btn-primary">👁️</button>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endif %}

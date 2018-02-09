@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="container-fluid mt-5">
+    <div class="row text-center">
+        <div class="col-12">
+            <h1>Ticket {{ ticket.id }}</h1>
+    <table class="table table-hover table-striped bg-light">
+        <thead>
+        <th>User</th>
+        <th>Description</th>
+        <th>Date</th>
+        <th>Skill</th>
+        <th>Offer(s)</th>
+        </thead>
+            <tr><td>{{ ticket.user.username }}</td>
+                <td>{{ ticket.title[:50] }}</td>
+                <td>{{ ticket.date.date|date('d-m-y H:i') }}</td>
+                <td>{{ ticket.skill.name }}</td>
+                <td>
+                    {{ ticket.offers |length }}
+                    <a href="{{ path('offer_add',{'id':ticket.id}) }}">
+                        <button class="float-right btn btn-sm btn-success">⊞</button>
+                    </a>
+                </td>
+            </tr>
+    </table>
+            <h1>Offers for Ticket {{ ticket.id }}</h1>
+<table class="table table-hover table-striped bg-light">
+    <thead>
+    <th>Title</th>
+    <th>By</th>
+    <th>Time</th>
+    <th>Amount</th>
+    <th>Insurance</th>
+    </thead>
+    {% for offer in ticket.offers %}
+        <tr><td>{{ offer.ticket.title }}</td>
+            <td>{{ offer.user.username }}</td>
+            <td>{{ offer.time.date|date('H:i')}}</td>
+            <td>{{ offer.amount }}</td>
+            <td>{% if offer.insurance == 1 %}
+                    <p class="text-success">YES</p>
+                {% else %}
+                    <p class="text-danger">NO</p>
+                {% endif %}
+                {% if ticket.user == app.user %}</td>
+                <td><a href="/ticket/offer/{{ ticket.id }}/{{ offer.id }}">
+                    <button class="float-right btn btn-sm btn-primary">✔</button>
+                </a></td>
+            {% endif %}
+        </tr>
+    {% endfor %}
+</table>
+        </div>
+    </div>
+</div>
+{% endblock %}

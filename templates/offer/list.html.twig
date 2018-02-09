@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="container-fluid mt-5">
+        <div class="row text-center">
+            <div class="col-12">
+                <form id="offerForm" name="offer" method="post" style="display: none">
+                    <div id="offer">
+                        <div>
+                            <input hidden id="offer_user" name="offer[user]" value="{{ app.user.id }}"/>
+                        </div>
+                        <div>
+                            <label for="offer_ticket" class="required">Ticket</label>
+                            <select id="offer_ticket" name="offer[ticket]">
+                                {% for ticket in tickets %}
+                                    <option value="{{ ticket.id }}">{{ ticket.title }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div>
+                            <label for="offer_time">Time</label>
+                        </div>
+                        <div>
+                            <label for="offer_time_hour" class="required">Hours</label>
+                            <input type="number" id="offer_time_hour" name="offer[time][hour]" required="required" />
+                            <label for="offer_time_minute" class="required">Minutes</label>
+                            <input type="number" id="offer_time_minute" name="offer[time][minute]" required="required" />
+                        </div>
+                        <div>
+                            <label for="offer_amount" class="required">Amount</label>
+                            <input type="number" id="offer_amount" name="offer[amount]" required="required" />
+                        </div>
+                        <div>
+                            <input type="checkbox" id="offer_insurance"
+                                   name="offer[insurance]" value="1" />
+                            <label for="offer_insurance">Insurance</label>
+                        </div>
+                        <input type="submit" class="btn btn-success mb-2" value="⊞">
+                    </div>
+
+                </form>
+                {% include 'user/offer.html.twig' %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
